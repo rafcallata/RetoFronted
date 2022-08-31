@@ -1,7 +1,13 @@
 import {useEffect,useState} from 'react'
 import {Link} from 'react-router-dom'
+import { ImBin } from 'react-icons/im'
 export const Questions = () => {
   const [preguntas, setPreguntas] = useState([])
+
+  const deleteTodo = (id) => {
+    const filteredTodo = preguntas.filter(pregunta => pregunta.id !== id)
+    setPreguntas(filteredTodo)
+    }
 
   useEffect(() => {
     let storagePreguntas = JSON.parse(
@@ -44,7 +50,16 @@ export const Questions = () => {
             >
                 <h3
                 
-                >{pregunta.pregunta}</h3>
+                >{pregunta.pregunta}</h3>   
+                <button style={{
+                cursor:'pointer',
+                color:'white',
+                margin:'auto',
+                height:'auto',
+                }}  onClick={() => deleteTodo(pregunta.id)}>
+                    <ImBin />
+                </button>           
+
             </div>
             </div>
         ))}
